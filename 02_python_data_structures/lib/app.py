@@ -5,115 +5,148 @@
 
 # Creating Lists
 #1. ✅ Create a list of 10 pet names
-pet_names = ['Rose', 'Meow Meow Beans', 'Mr.Legumes', 'Luke', 'Lea', 'Princess Grace', 'Spot', 'Tom', 'Mini', 'Paul']
+pet_names = ['Rose', 'Meow Meow Beans', 'Mr.Legumes', 'Luke', 'Luke', 'Lea', 'Princess Grace', 'Spot', 'Tom', 'Mini', 'Paul']
 
 # Reading Information From Lists
-#2. ✅ Return the first pet name
+# #2. ✅ Return the first pet name
+print(pet_names[0])
 
+# #3. ✅ Return all pet names beginning from the 3rd index
+# # ^ Includes pet_names[3]
+print(pet_names[3:])
 
-#3. ✅ Return all pet names beginning from the 3rd index
+# #4. ✅ Return all pet names before the 3rd index
+# # ^ Does NOT include pet_names[3]
+print(pet_names[:3])
 
+# #5. ✅ Return all pet names beginning from the 3rd index and up to / including the 7th index
+print(pet_names[3:8])
 
-#4. ✅ Return all pet names before the 3rd index
-
-
-#5. ✅ Return all pet names beginning from the 3rd index and up to / including the 7th index
-
-
-#6. ✅ Find the index of a given element => .index()
-
+# #6. ✅ Find the index of a given element => .index()
+print(pet_names.index("Luke"))
 
 #7. ✅ Reverse the original list => .reverse()
+# ^ Destructive => completely reassigns the indexes of pet_names 
+# pet_names.reverse()
+# print(pet_names)
 
+# ^ NOT destructive => original pet_names remains the same
+print(pet_names[::-1])
 
 #8. ✅ Return the frequency of a given element => .count()
-
+print(pet_names.count("Luke"))
 
 # Updating Lists
 #9. ✅ Change the first pet_name to all uppercase letters => .upper()
-
+# ^ NOT destructive
+print(pet_names[0].upper())
 
 #10. ✅ Append a new name to the list => .append()
-
+# ^ Destructive
+pet_names.append("Lady")
+print(pet_names)
 
 #11. ✅ Add a new name at a specific index => .insert()
-
+# ^ Destructive
+pet_names.insert(2, "Spider")
+print(pet_names)
 
 #12. ✅ Add two lists together => +
-
+print([1, 2, 3] + [4, 5, 6])
 
 #13. ✅ Remove the final element from the list => .pop()
-
+# ^ Destructive BUT returns that removed (popped) element
+pet_names.pop()
+print(pet_names)
 
 #14. ✅ Remove element by specific index => .pop()
+# ^ Destructive
+pet_names.pop(2)
+print(pet_names)
 
-
-#15. ✅ Remove a specific element => .remove()
-
+#15. ✅ Remove a specific element by it's string => .remove()
+# ^ Destructive BUT will only remove the first instance of it, not all instances if an element has duplicates
+pet_names.remove("Paul")
+print(pet_names)
 
 #16. ✅ Remove all pet names from the list => .clear()
+# ^ Destructive
+pet_names.clear()
+print(pet_names)
 
 #Tuple
 # 📚 Review:
-    # Mutable, Immutable <=> Changeable, Unchangeable
+    # List, Tuple <=> Mutable, Immutable <=> Changeable, Unchangeable
     
     # Why Are Tuples Immutable?
 
         # What advantages does this provide for us? In what situations
         # would this serve us?
 
-#17. ✅ Create a Tuple of 10 pet ages => () 
+        # Tuples are useful for representing static data (not dynamic or alterable)
 
+#17. ✅ Create a Tuple of 10 pet ages => () 
+pet_ages = (1, 2, 3, 4, 5, 5, 5, 5, 5, 5, 6, 7, 8, 9, 9, 9)
 
 #18. ✅ Print the first pet age => []
-
+print(pet_ages[0])
 
 # Testing Mutability 
 #19. ✅ Attempt to remove an element with ".pop" (should error)
-
+# ! pet_ages.pop() => AttributeError: 'tuple' object has no attribute 'pop'
 
 #20. ✅ Attempt to change the first element (should error) => []
-
+# ! pet_ages[2] = 4 => TypeError: 'tuple' object does not support item assignment
 
 # Tuple Methods
 #21. ✅ Return the frequency of a given element => .count()
-
+print(pet_ages.count(5))
 
 #22. ✅ Return the index of a given element  => .index()
-
+print(pet_ages.index(5))
 
 #23. ✅ Create a Range 
 # Note:  Ranges are primarily used in loops
-
+# ^ This will print all the values from 0 to 19 because it does not include 20
+my_range = range(20)
+for num in my_range:
+   print(num)
 
 # Sets (Stretch Goal)
 #24. ✅ Create a set of 3 pet foods
 pet_fav_food = {'house plants', 'fish', 'bacon'}
 
-# Dictionaries 
+# Dictionaries (Remind us of objects in JS formatted like json)
 # Creating 
 #25. ✅  Create a dictionary of pet information with the keys "name", "age" and "breed"
 pet_info_rose = {'name':'Rose', 'age':11, 'breed':'domestic long'}
 
 
 #26. ✅  Use dict to create a dictionary of pet information with the keys "name", "age" and "breed" => dict(...)
+# The advantage here is that it minimizes possibility of keystroke errors
 pet_info_spot = dict(name='Spot', age=25, breed='boxer')
 
 # Reading
 #27. ✅ Print the pet attribute of "name" using bracket notation 
-# print(pet_info_rose['temperament'])
+print(pet_info_rose['name']) # Returns "Rose"
+# ! print(pet_info_rose['temperament']) => Returns "KeyError: 'temperament'"
 
 #28. ✅ Print the pet attribute of "age" using ".get"
+# get() is a built in dictionary method
+# ^ Note: ".get" is preferred over bracket notation in most cases because it will return "None" instead of an error
 
-    # Note: ".get" is preferred over bracket notation in most cases 
-    # because it will return "None" instead of an error
+print(pet_info_rose.get('name')) # Returns 'Rose'
+print(pet_info_rose.get('temperament')) # Returns "None"
 
 # Updating 
 #29. ✅ Update Rose's age to 12 => []
-
+# ^ Bracket notation will work for this but .get() will not work to update values
+pet_info_rose['age'] = 12
+print(pet_info_rose)
 
 #30. ✅ Update Spot's age to 26 => .update({...})
-
+pet_info_spot.update({'age':26})
+print(pet_info_spot)
 
 # Deleting
 #31. ✅ Delete Rose's age using the "del" keyword => []
