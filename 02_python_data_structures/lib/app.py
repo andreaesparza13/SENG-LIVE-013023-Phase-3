@@ -150,15 +150,22 @@ print(pet_info_spot)
 
 # Deleting
 #31. ✅ Delete Rose's age using the "del" keyword => []
-
+# ^ Built in 'del' is destructive
+del pet_info_rose['age']
+print(pet_info_rose)
 
 #32. ✅ Delete Spot's age using ".pop"
-
+# ^ pop() is destructive BUT the return is the value of the key:value pair which we can capture in a variable
+pet_info_rose.pop('name') # Returns 12 because that's the value of age
+print(pet_info_rose)
 
 #33. ✅ Delete the last item for Rose using "popitem()"
-
+# ^ Destructive and don't need anything in parenthesis either
+pet_info_rose.popitem() # Returns a TUPLE containing 2 items: (key, value)
+print(pet_info_rose)
 
 # Loops 
+# Below is a List of Dictionaries 
 pet_info = [
     {
         'name':'Rose',
@@ -178,18 +185,27 @@ pet_info = [
 ]
 
 #34. ✅ Loop through a range of 10 and print every number within the range
-
+my_range_2 = range(10)
+for num in my_range_2:
+   print(num)
 
 #35. ✅ Loop through a range between 50 and 60 that iterates by 2 and print every number
-
+my_range_3 = range(50, 60, 2)
+for num in my_range_3:
+   print(num)
 
 #36. ✅ Loop through the "pet_info" list and print every dictionary 
-
+for pet in pet_info:
+   print(pet)
 
 #37. ✅ Create a function that takes a list a parameter 
-    # The function should use a "for" loop to loop through the list and print each item 
-    # Invoke the function and pass it "pet_names" as an argument
+# The function should use a "for" loop to loop through the list and print each item 
+def output_pet_names(list):
+   for pet in list:
+      print(pet)
 
+# Invoke the function and pass it "pet_names" as an argument
+output_pet_names(pet_info)
 
 #38. ✅ Create a function that takes a list as a parameter
     # The function should define a variable ("counter") and set it to 0
@@ -197,7 +213,13 @@ pet_info = [
         # The loop will continue as long as the counter is less than the length of the list
         # Every loop should increase the count by 1
     # Once the loop has finished, return the final value of "counter"
+def return_pet_count(list):
+    counter = 0
+    while (counter < len(list)):
+        counter += 1
+    return counter
 
+print(return_pet_count(pet_info))
 
 #39. ✅ Create a function that updates the age of a given pet
         # The function should take a list of "dictionaries", "name" and "age" as parameters 
@@ -208,19 +230,50 @@ pet_info = [
             # Every list will increase the index by 1
         # If the dictionary containing a matching name is found, update the item's age with the new age 
             # Otherwise, return 'Pet not found'
-    
+def update_pet_age(list, name, age):
+    i = 0
+    while(i<(len(list)-1) and list[i]['name'] != name):
+        i += 1
+    if (list[i]['name'] == name):
+        list[i]['age'] = age
+        return list
+    else:
+        return "Pet Not Found"
 
 # map like 
 #40. ✅ Use list comprehension to return a list containing every pet name from "pet_info" changed to uppercase
+# def to_upper(name):
+#     name = name.upper()
 
+# pet_names_to_upper = map(to_upper, pet_names)
+# print(list(pet_names_to_upper))
+new_pet_list = [pet.get('name').upper() for pet in pet_info]
+print(new_pet_list)
 
 # find like
 #41. ✅ Use list comprehension to find a pet named spot
-
+# spot = [RETURNED PET / LOOP / CONDITIONAL]
+spot = [pet for pet in pet_info if pet.get("name") == 'Spot' ]
+print(spot)
 
 # filter like
 #42. ✅ Use list comprehension to find all of the pets under 3 years old
-
+# young_pets = [RETURNED PET / LOOP / CONDITIONAL]
+young_pets = [pet for pet in pet_info if pet.get("age") < 2]
+print(len(young_pets))
 
 #43. ✅ Create a generator expression matching the filter above
+# ^ Main Benefit => Less Memory Intensive
 
+young_pets = (pet for pet in pet_info if pet.get("age") < 26)
+
+# ^ Accessing Generator Object Values
+
+# 1. Using next()
+print(next(young_pets))
+print(next(young_pets))
+print(next(young_pets))
+
+# 2. Using a for loop
+for pet in young_pets:
+    print(pet)
